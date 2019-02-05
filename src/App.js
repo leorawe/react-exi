@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import SearchBar from './components/SearchBar'
-import Table from './components/Table'
+//import Table from './components/Table'
 import './App.css'
 
-const TITLE = 'React GraphQL EXI Client'
+const TITLE = 'React EXI Client'
 const DEFAULT_QUERY = 'MET'
 
 // const axiosExi = axios.create({
@@ -33,14 +33,15 @@ class App extends Component {
     }
 
     onSearchSubmit(event) {
+      //validate search term
       const { searchTerm } = this.state;
       this.fetchMarket(searchTerm);
-     console.log(searchTerm, "here");
+     //console.log(searchTerm, "here");
       event.preventDefault();
       }  
 
    onSearchChange(event) {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         this.setState({ searchTerm: event.target.value });
         
       }  
@@ -96,13 +97,13 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h1>{TITLE}</h1>
         <SearchBar 
           value={this.state.searchTerm}
           onChange={this.onSearchChange}
           onSubmit={this.onSearchSubmit}
         />
-        <Table />
-        <h1>{TITLE}</h1>
+        {/* <Table /> */}
         <p>Price: {this.state.symbolData.price}</p>
         <p>Symbol: {this.state.symbolData.symbol}</p>
         <p>Size: {this.state.symbolData.size}</p>

@@ -1,9 +1,11 @@
 import React from 'react'
 
-const Table = () => {
+const Table = (props) => {
   return (
     <div>
-      table of stock market info
+        <p>Price: {props.price}</p>
+        <p>Symbol: {props.symbol}</p>
+        <p>Size: {props.size}</p>
     </div>
   )
 }

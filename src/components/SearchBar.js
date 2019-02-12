@@ -5,7 +5,7 @@ class SearchBar extends React.Component  {
 
     onFormSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state.term);
+      //  console.log(this.state.term);
        //this.props.onSubmit(this.state.term);
     }
 
@@ -28,8 +28,7 @@ class SearchBar extends React.Component  {
                 <input type="text" placeholder="type"
                 value={value}
                 onChange={onChange}
-                />
-                <button type="submit">
+                /> <button type="submit">
                 go
                 </button>
                 </div>

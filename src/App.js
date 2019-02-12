@@ -93,7 +93,29 @@ class App extends Component {
           .then(result => {
           console.log(result.data)
           })
-   }    
+          .catch(error2 => 
+            {
+              // Error
+              if (error2.response) {
+                  // The request was made and the server responded with a status code
+                  // that falls out of the range of 2xx
+                   console.log(error2.response.data);
+                   console.log(error2.response.status);
+                   console.log(error2.response.headers);
+                   //this.setState({error});
+              } else if (error2.request) {
+                  // The request was made but no response was received
+                  // `error.request` is an instance of XMLHttpRequest in the 
+                  // browser and an instance of
+                  // http.ClientRequest in node.js
+                  console.log("Response error ", error2.request);
+              } else {
+                  // Something happened in setting up the request that triggered an Error
+                  console.log('Error', error2.message);
+                 // this.setState({error});
+                }
+              })
+            }            
   
   componentDidMount(){
       this.setState({loading: true})

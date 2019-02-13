@@ -25,6 +25,10 @@ class App extends Component {
               price: '',
               symbol: '',
               size: ''
+            },
+            companyInfo: {
+              company: '',
+              description: ''
             }
         }
         this.onSearchChange = this.onSearchChange.bind(this);
@@ -34,6 +38,8 @@ class App extends Component {
     }
 
     onSearchSubmit(event) {
+      //clear error log first
+      this.setState({error:null});
       //validate search term
       const { searchTerm } = this.state;
       this.fetchMarket(searchTerm);
@@ -45,6 +51,7 @@ class App extends Component {
    onSearchChange(event) {
         //console.log(event.target.value);
         this.setState({ searchTerm: event.target.value });
+        this.setState({error:null});
         event.preventDefault();
       }  
 
@@ -60,6 +67,7 @@ class App extends Component {
                   }
                 })
              })
+        //put fetchInfo here instead of onSubmit??? 
         // .catch(error => console.log(error))   
         // .catch(error => this.setState({error}))
         .catch(error => 
@@ -91,7 +99,13 @@ class App extends Component {
     console.log(symbol);
      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
           .then(result => {
-          console.log(result.data)
+          console.log(result.data.description);
+          this.setState({
+            companyInfo: {
+              company: result.data.companyName,
+              description: result.data.description
+               }
+            })
           })
           .catch(error2 => 
             {
@@ -123,7 +137,6 @@ class App extends Component {
       this.fetchMarket(search)
   }  
 
-    
     //implement search box
     //where are some examples from tutorials?
     //improvements - real time search like with Algolia
@@ -133,18 +146,22 @@ class App extends Component {
     //find examples of apps that do more than one thing - mini menu?
     //layout for two - how to select two???
 
-    //do selected and save to State
     //learn to do tests - how to show this???
+
+    //add loading? ternary
+
+    //fix error handling - says error too soon
 
   render() {
     let result;
     const {
       searchTerm,
       symbolData,
+      companyInfo,
       error
       } = this.state;
     if (error) {
-        console.log(error )
+        console.log('inside Render function ', error );
         let piece = `Sorry, ${searchTerm} not found! Try again`
         result = (
           <Fragment>
@@ -159,6 +176,8 @@ class App extends Component {
             price = {symbolData.price}
             symbol = {symbolData.symbol}
             size = {symbolData.size}
+            company = {companyInfo.company}
+            description = {companyInfo.description}
           />
         }
     return (

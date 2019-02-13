@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Table = (props) => {
+  console.log(props.description)
   return (
     <div>
         <p>Price: {props.price}</p>

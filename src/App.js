@@ -21,13 +21,13 @@ class App extends Component {
             searchTerm: DEFAULT_QUERY,
             loading: false,
             error: null,
+            table: true,
             symbolData: {
               price: '',
               symbol: '',
               size: ''
             },
             companyInfo: {
-              company: '',
               description: ''
             }
         }
@@ -39,26 +39,31 @@ class App extends Component {
 
     onSearchSubmit(event) {
       //clear error log first
+      console.log('why a flash?')
+      event.preventDefault();
+      this.setState({table:true});
       this.setState({error:null});
       //validate search term
       const { searchTerm } = this.state;
       this.fetchMarket(searchTerm);
       this.fetchInfo(searchTerm);
      //console.log(searchTerm, "here");
-      event.preventDefault();
+      
       }  
 
    onSearchChange(event) {
         //console.log(event.target.value);
         this.setState({ searchTerm: event.target.value });
         this.setState({error:null});
+      //  console.log('why does it re-render now?')
+       this.setState({table:false});
         event.preventDefault();
       }  
 
     fetchMarket(searchTerm) {
         axios.get(`https://api.iextrading.com/1.0/tops/last?symbols=${searchTerm}`)
          .then(result => {
-             console.log(result, result.data[0].price, result.data[0].symbol, result.data[0].size)
+          //   console.log(result, result.data[0].price, result.data[0].symbol, result.data[0].size)
             this.setState({
                   symbolData: {
                     price: result.data[0].price,
@@ -88,7 +93,7 @@ class App extends Component {
               console.log("Response error ", error.request);
           } else {
               // Something happened in setting up the request that triggered an Error
-              console.log('Error', error.message);
+              console.log('Error - 3rd type', error.message);
               this.setState({error});
           }
          // console.log(error.config);
@@ -99,10 +104,9 @@ class App extends Component {
     console.log(symbol);
      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
           .then(result => {
-          console.log(result.data.description);
+        //  console.log(result.data.description);
           this.setState({
             companyInfo: {
-              company: result.data.companyName,
               description: result.data.description
                }
             })
@@ -129,7 +133,9 @@ class App extends Component {
                  // this.setState({error});
                 }
               })
-            }            
+            }    
+
+  // doReset                 
   
   componentDidMount(){
       this.setState({loading: true})
@@ -137,11 +143,7 @@ class App extends Component {
       this.fetchMarket(search)
   }  
 
-    //implement search box
-    //where are some examples from tutorials?
-    //improvements - real time search like with Algolia
-
-    //improve CSS for outcome
+    //implement search box - DONE
 
     //find examples of apps that do more than one thing - mini menu?
     //layout for two - how to select two???
@@ -150,7 +152,7 @@ class App extends Component {
 
     //add loading? ternary
 
-    //fix error handling - says error too soon
+    //reset after not found
 
   render() {
     let result;
@@ -158,28 +160,31 @@ class App extends Component {
       searchTerm,
       symbolData,
       companyInfo,
-      error
+      error,
+      table
       } = this.state;
+   // const loadText = this.state.loading ? "loading..." :  "" ;
     if (error) {
         console.log('inside Render function ', error );
         let piece = `Sorry, ${searchTerm} not found! Try again`
+        //maybe take everything out of State?
         result = (
           <Fragment>
            <div>{piece}</div> 
           </Fragment>
         )
         }  
-        else 
+        else if(table)
         {
           result = <Table 
             searchTerm = {searchTerm}
             price = {symbolData.price}
             symbol = {symbolData.symbol}
             size = {symbolData.size}
-            company = {companyInfo.company}
             description = {companyInfo.description}
           />
         }
+
     return (
       <div>
         <h1>{TITLE}</h1>

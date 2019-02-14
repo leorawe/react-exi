@@ -1,5 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### EXI API - compare prices
+### IEX API - shows recent transaction
 
-This app will compare two companies on the stock market.
+This app shows recent IEX transaction on the stock market.  You can look up by ticker symbol.

@@ -38,11 +38,8 @@ class App extends Component {
     }
 
     onSearchSubmit(event) {
-      //clear error log first
-      console.log('why a flash?')
       event.preventDefault();
-      this.setState({table:true});
-      this.setState({error:null});
+     // this.setState({error:null});
       //validate search term
       const { searchTerm } = this.state;
       this.fetchMarket(searchTerm);
@@ -63,6 +60,8 @@ class App extends Component {
     fetchMarket(searchTerm) {
         axios.get(`https://api.iextrading.com/1.0/tops/last?symbols=${searchTerm}`)
          .then(result => {
+          this.setState({error:null});
+          this.setState({table:true});
           //   console.log(result, result.data[0].price, result.data[0].symbol, result.data[0].size)
             this.setState({
                   symbolData: {
@@ -101,7 +100,7 @@ class App extends Component {
       }  
 
   fetchInfo(symbol){
-    console.log(symbol);
+   // console.log(symbol);
      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
           .then(result => {
         //  console.log(result.data.description);
@@ -160,8 +159,8 @@ class App extends Component {
       searchTerm,
       symbolData,
       companyInfo,
-      error,
-      table
+      table,
+      error
       } = this.state;
    // const loadText = this.state.loading ? "loading..." :  "" ;
     if (error) {
@@ -174,15 +173,18 @@ class App extends Component {
           </Fragment>
         )
         }  
-        else if(table)
+       else if(table)
         {
-          result = <Table 
+          result = 
+          <Table 
             searchTerm = {searchTerm}
             price = {symbolData.price}
             symbol = {symbolData.symbol}
             size = {symbolData.size}
             description = {companyInfo.description}
           />
+          // <div>maybe some kind of explanation and atrribution to iex will go here?</div>
+         
         }
 
     return (
@@ -194,6 +196,7 @@ class App extends Component {
           onSubmit={this.onSearchSubmit}
         />
         {result}
+       
       </div>
     )
   }

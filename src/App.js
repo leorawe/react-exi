@@ -25,7 +25,8 @@ class App extends Component {
             symbolData: {
               price: '',
               symbol: '',
-              size: ''
+              size: '',
+              time: ''
             },
             companyInfo: {
               description: ''
@@ -62,12 +63,14 @@ class App extends Component {
          .then(result => {
           this.setState({error:null});
           this.setState({table:true});
+          console.log(result.data[0])
           //   console.log(result, result.data[0].price, result.data[0].symbol, result.data[0].size)
             this.setState({
                   symbolData: {
                     price: result.data[0].price,
                     symbol: result.data[0].symbol,
-                    size: result.data[0].size
+                    size: result.data[0].size,
+                    time: result.data[0].time
                   }
                 })
              })
@@ -103,7 +106,7 @@ class App extends Component {
    // console.log(symbol);
      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
           .then(result => {
-        //  console.log(result.data.description);
+         // console.log(result.data);
           this.setState({
             companyInfo: {
               description: result.data.description
@@ -181,10 +184,11 @@ class App extends Component {
             price = {symbolData.price}
             symbol = {symbolData.symbol}
             size = {symbolData.size}
+            time = {symbolData.time}
             description = {companyInfo.description}
           />
-          // <div>maybe some kind of explanation and atrribution to iex will go here?</div>
-         
+          
+                  
         }
 
     return (

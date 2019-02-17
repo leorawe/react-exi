@@ -1,6 +1,7 @@
 import React from 'react';
+import styled from 'styled-components'
 
-class SearchBar extends React.Component  {
+const SearchBar =(props)=> {
     
     // onInputClick() {
     //     console.log('Input was Clicked');
@@ -10,9 +11,25 @@ class SearchBar extends React.Component  {
     //add ui from there??? ui semantics
     // value={this.state.term}
     // onChange={e => this.setState({term: e.target.value})}
-  
-    render() {
-        const { value, onChange, onSubmit } = this.props;
+ const GoButton = styled.button`
+    background: transparent;
+    border-radius: 15px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 2px solid #008b00;
+    color: #008b00;
+    margin: 0;
+    padding: 0.25em 1em;
+  `;
+//   const GoInput = styled.input`
+//     background: white;
+//     border: 2px solid #008b00;
+//     border-right: none;
+//     color: #333;
+//     margin: 0;
+//     padding: 0.25em 1em;
+//   `;
+    const { value, onChange, onSubmit } = props;
         return (
         <div className="ui segment">
             <form onSubmit={onSubmit} className="ui form">
@@ -21,14 +38,14 @@ class SearchBar extends React.Component  {
                 <input type="text" placeholder="type"
                 value={value}
                 onChange={onChange}
-                /> <button type="submit">
+                /><GoButton type="submit">
                 go
-                </button>
+                </GoButton>
                 </div>
             </form>
         </div>
         )
     }
-}
+
 
 export default SearchBar;

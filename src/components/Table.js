@@ -16,7 +16,7 @@ const Table = (props) => {
         <p>When: {year}-{time.getMonth()+1}-{time.getDate()} {time.getHours()}:{time.getMinutes()}  </p>
         {des}
         <hr />
-        <div>maybe some kind of explanation and atrribution to iex will go here?</div>
+        <div className="about">The  Investors Exchange (IEX) is a stock exchange for U.S. equities that is built for investors and companies.</div>
     </div>
   )
 }

@@ -28,6 +28,11 @@ const GoButton = styled.button`
     box-shadow: 0 0 5px #008b00;
   }
   `;
+ const SearchWrapper = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: white;
+    `
 
 const SearchBar =(props)=> {
     
@@ -42,16 +47,17 @@ const SearchBar =(props)=> {
  
     const { value, onChange, onSubmit } = props;
         return (
-        <div className="ui segment">
+        <div>
             <form onSubmit={onSubmit} className="ui form">
                 <div className="field">
                 <label>Ticker Symbol Search: </label>
+                <SearchWrapper>
                 <GoInput type="text" placeholder="type"
                 value={value}
                 onChange={onChange}
                 /><GoButton type="submit">
                 go
-                </GoButton>
+                </GoButton></SearchWrapper>
                 </div>
             </form>
         </div>

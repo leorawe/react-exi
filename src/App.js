@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
@@ -14,6 +14,16 @@ const DEFAULT_QUERY = 'MET'
 const TitleStyle = styled.h1`
   font-family: merriweather, serif
   `
+const NotFound = styled.div`
+   font-style: italic;
+   color: #666;
+   display: inline;
+`
+const NotFoundTerm = styled.div`
+   font-style: italic;
+   color: #006400;
+   display: inline;
+`
 const Wrapper = styled.div`
    margin: 0 auto;
    padding: 10px 20px;
@@ -184,12 +194,10 @@ class App extends Component {
    // const loadText = this.state.loading ? "loading..." :  "" ;
     if (error) {
         console.log('inside Render function ', error );
-        let piece = `Sorry, ${searchTerm} not found! Try again`
+        let piece = `${searchTerm}`
         //maybe take everything out of State?
         result = (
-          <Fragment>
-           <div>{piece}</div> 
-          </Fragment>
+          <NotFound>Sorry, <NotFoundTerm>{piece}</NotFoundTerm> not found! Try again</NotFound>
         )
         }  
        else if(table)

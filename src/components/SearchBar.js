@@ -9,6 +9,11 @@ const GoButton = styled.button`
     color: #fff;
     margin: 0;
     padding: 0.5em 1em;
+    &:focus {
+    outline: none;
+    border-color: #008b00;
+    box-shadow: 0 0 5px #008b00;
+  }
   `;
   const GoInput = styled.input`
     background: white;
@@ -17,6 +22,11 @@ const GoButton = styled.button`
     color: #333;
     margin: 0;
     padding: 0.5em 1em;
+    &:focus {
+    outline: none;
+    border-color: #008b00;
+    box-shadow: 0 0 5px #008b00;
+  }
   `;
 
 const SearchBar =(props)=> {

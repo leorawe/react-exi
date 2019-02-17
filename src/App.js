@@ -1,12 +1,28 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
 
 import SearchBar from './components/SearchBar'
 import Table from './components/Table'
 import './App.css'
 
+require ('typeface-merriweather')
+
 const TITLE = 'React IEX Client'
 const DEFAULT_QUERY = 'MET'
+
+const TitleStyle = styled.h1`
+  font-family: merriweather, serif
+  `
+const Wrapper = styled.div`
+   margin: 0 auto;
+   padding: 10px 20px;
+   max-width: 600px;
+   border: 1px solid #CAEAD8;
+   border-radius: 3px;
+   font-family: arial;
+   background-color: #ffffff;
+   `
 
 // const axiosExi = axios.create({
 //   baseURL: 'https://api.iextrading.com/1.0/',
@@ -192,8 +208,8 @@ class App extends Component {
         }
 
     return (
-      <div>
-        <h1>{TITLE}</h1>
+      <Wrapper>
+        <TitleStyle>{TITLE}</TitleStyle>
         <SearchBar 
           value={searchTerm}
           onChange={this.onSearchChange}
@@ -201,7 +217,7 @@ class App extends Component {
         />
         {result}
        
-      </div>
+      </Wrapper>
     )
   }
 }

@@ -93,7 +93,7 @@ class App extends Component {
       }  
 
     toggleHidden(event) {
-      console.log('tog');
+     // console.log('tog');
         this.setState({
           infoHidden: !this.state.infoHidden
         })
@@ -148,7 +148,7 @@ class App extends Component {
    // console.log(symbol);
      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
           .then(result => {
-          console.log(result.data);
+          //console.log(result.data);
           this.setState({
             companyInfo: {
               name: result.data.companyName,

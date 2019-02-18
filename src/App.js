@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import SearchBar from './components/SearchBar'
 import Table from './components/Table'
+import IexInfo from './components/IexInfo'
 import './App.css'
 
 require ('typeface-merriweather')
@@ -21,7 +22,7 @@ const NotFound = styled.div`
 `
 const NotFoundTerm = styled.div`
    font-style: italic;
-   color: #006400;
+   color: red;
    display: inline;
 `
 const Wrapper = styled.div`
@@ -32,6 +33,8 @@ const Wrapper = styled.div`
    border-radius: 3px;
    font-family: arial;
    background-color: #ffffff;
+   display: flex;
+   flex-direction: column;
    `
 
 // const axiosExi = axios.create({
@@ -55,7 +58,10 @@ class App extends Component {
               time: ''
             },
             companyInfo: {
-              description: ''
+              name: '',
+              description: '',
+              industry:'',
+              sector:''
             }
         }
         this.onSearchChange = this.onSearchChange.bind(this);
@@ -89,7 +95,7 @@ class App extends Component {
          .then(result => {
           this.setState({error:null});
           this.setState({table:true});
-          console.log(result.data[0])
+         // console.log(result.data[0])
           //   console.log(result, result.data[0].price, result.data[0].symbol, result.data[0].size)
             this.setState({
                   symbolData: {
@@ -132,10 +138,13 @@ class App extends Component {
    // console.log(symbol);
      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/company`)
           .then(result => {
-         // console.log(result.data);
+          console.log(result.data);
           this.setState({
             companyInfo: {
-              description: result.data.description
+              name: result.data.companyName,
+              description: result.data.description,
+              industry: result.data.industry,
+              sector: result.data.sector
                }
             })
           })
@@ -180,7 +189,7 @@ class App extends Component {
 
     //add loading? ternary
 
-    //reset after not found
+
 
   render() {
     let result;
@@ -209,7 +218,10 @@ class App extends Component {
             symbol = {symbolData.symbol}
             size = {symbolData.size}
             time = {symbolData.time}
+            coname = {companyInfo.name}
             description = {companyInfo.description}
+            sector = {companyInfo.sector}
+            industry = {companyInfo.industry}
           />
           
                   
@@ -224,7 +236,7 @@ class App extends Component {
           onSubmit={this.onSearchSubmit}
         />
         {result}
-       
+      <IexInfo /> 
       </Wrapper>
     )
   }

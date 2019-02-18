@@ -51,6 +51,7 @@ class App extends Component {
             loading: false,
             error: null,
             table: true,
+            infoHidden: true,
             symbolData: {
               price: '',
               symbol: '',
@@ -66,6 +67,7 @@ class App extends Component {
         }
         this.onSearchChange = this.onSearchChange.bind(this);
         this.onSearchSubmit = this.onSearchSubmit.bind(this);
+        this.toggleHidden = this.toggleHidden.bind(this);
         this.fetchMarket = this.fetchMarket.bind(this);
         this.fetchInfo = this.fetchInfo.bind(this);
     }
@@ -88,6 +90,14 @@ class App extends Component {
       //  console.log('why does it re-render now?')
        this.setState({table:false});
         event.preventDefault();
+      }  
+
+    toggleHidden(event) {
+      console.log('tog');
+        this.setState({
+          infoHidden: !this.state.infoHidden
+        })
+        event.preventDefault(); 
       }  
 
     fetchMarket(searchTerm) {
@@ -197,6 +207,7 @@ class App extends Component {
       searchTerm,
       symbolData,
       companyInfo,
+      infoHidden,
       table,
       error
       } = this.state;
@@ -236,7 +247,10 @@ class App extends Component {
           onSubmit={this.onSearchSubmit}
         />
         {result}
-      <IexInfo /> 
+      <IexInfo 
+      toggle={this.toggleHidden}
+      info={infoHidden}  
+      /> 
       </Wrapper>
     )
   }

@@ -62,7 +62,8 @@ class App extends Component {
               name: '',
               description: '',
               industry:'',
-              sector:''
+              sector:'',
+              ceo: ''
             }
         }
         this.onSearchChange = this.onSearchChange.bind(this);
@@ -105,6 +106,7 @@ class App extends Component {
          .then(result => {
           this.setState({error:null});
           this.setState({table:true});
+          this.setState({infoHidden:true});
          // console.log(result.data[0])
           //   console.log(result, result.data[0].price, result.data[0].symbol, result.data[0].size)
             this.setState({
@@ -116,7 +118,7 @@ class App extends Component {
                   }
                 })
              })
-             
+
         .catch(error => 
         {
           // Error
@@ -150,6 +152,7 @@ class App extends Component {
           this.setState({
             companyInfo: {
               name: result.data.companyName,
+              ceo: result.data.CEO,
               description: result.data.description,
               industry: result.data.industry,
               sector: result.data.sector
@@ -186,18 +189,16 @@ class App extends Component {
       this.setState({loading: true})
       let search = this.state.searchTerm
       this.fetchMarket(search)
+      //for now do not load the info on the start screen - so there is less info at first
+      //this.fetchInfo(search)
   }  
-
-    //implement search box - DONE
 
     //find examples of apps that do more than one thing - mini menu?
     //layout for two - how to select two???
 
-    //learn to do tests - how to show this???
+    //learn to do tests - jest for render, enzyme for biz logic
 
     //add loading? ternary
-
-
 
   render() {
     let result;
@@ -231,6 +232,7 @@ class App extends Component {
             description = {companyInfo.description}
             sector = {companyInfo.sector}
             industry = {companyInfo.industry}
+            ceo = {companyInfo.ceo}
           />
           
                   

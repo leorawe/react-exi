@@ -8,6 +8,7 @@ const Table = (props) => {
   let time = new Date(props.time)
   let year = time.getFullYear();
   let coname = props.coname.length > 0 && <p>Company Name: {props.coname}</p>
+  let ceo = props.ceo.length > 0 && <p>CEO: {props.ceo}</p>
   let sector = props.sector.length > 0 && <p>Sector: {props.sector}</p>
   let industry = props.industry.length > 0 && <p>Industry: {props.industry}</p>
   return (
@@ -18,6 +19,7 @@ const Table = (props) => {
         <p>When: {year}-{time.getMonth()+1}-{time.getDate()} {time.getHours()}:{time.getMinutes()}  </p>
         {coname}
         {des}
+        {ceo}
         {sector}
         {industry}
     </div>

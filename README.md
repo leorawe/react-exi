@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This app shows recent IEX transaction on the stock market.  You can look up by ticker symbol.
 
+[SEE DEMO](https://iex-app.netlify.com/)
+
 ##  APIs  
 It accesses two apis (this uses MET as an example of a symbol):  
 https://api.iextrading.com/1.0/tops/last/?symbols=MET  

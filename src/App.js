@@ -116,9 +116,7 @@ class App extends Component {
                   }
                 })
              })
-        //put fetchInfo here instead of onSubmit??? 
-        // .catch(error => console.log(error))   
-        // .catch(error => this.setState({error}))
+             
         .catch(error => 
         {
           // Error

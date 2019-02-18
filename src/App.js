@@ -28,7 +28,7 @@ const NotFoundTerm = styled.div`
 const Wrapper = styled.div`
    margin: 0 auto;
    padding: 10px 20px;
-   max-width: 600px;
+   max-width: 800px;
    border: 1px solid #CAEAD8;
    border-radius: 3px;
    font-family: arial;

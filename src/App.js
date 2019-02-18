@@ -32,6 +32,7 @@ const Wrapper = styled.div`
    border: 1px solid #CAEAD8;
    border-radius: 3px;
    font-family: arial;
+   font-size: 1.2rem;
    background-color: #ffffff;
    display: flex;
    flex-direction: column;
